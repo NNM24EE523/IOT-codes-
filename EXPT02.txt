@@ -1,0 +1,26 @@
+#include<LiquidCrystal_I2C.h>
+#include<Wire.h>
+LiquidCrystal_I2C lcd(0x27,16,2);
+int sensorPin=A0;
+
+
+void setup() {
+ Serial.begin(9600);
+  lcd.init();
+  lcd.backlight();  
+
+
+}
+
+void loop() {
+  int mysensorvalue=analogRead(sensorPin);
+  float voltage=( mysensorvalue*5.0)/1023.0;
+  float current=(voltage-2.5)/0.066;
+  lcd.setCursor(0,0);
+  lcd.print("current:");
+  lcd.print(current);
+  lcd.setCursor(0,1);
+  lcd.print("voltage:");
+  lcd.print(voltage);
+  delay(1000);
+}
